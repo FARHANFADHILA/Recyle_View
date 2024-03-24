@@ -84,8 +84,6 @@ fun Listdata(model: Mahasiswa) {
                     modifier = Modifier
                         .size(100.dp)
                         .padding(15.dp)
-                        ,
-                    contentScale = ContentScale.Fit
                     )
                 Column(
                     modifier = Modifier
