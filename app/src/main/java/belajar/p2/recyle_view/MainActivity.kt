@@ -1,12 +1,16 @@
 package belajar.p2.recyle_view
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.res.Resources.Theme
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -29,11 +33,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat.startActivity
 import belajar.p2.recyle_view.data.Data_Source
 import belajar.p2.recyle_view.data.Mahasiswa
 import belajar.p2.recyle_view.ui.theme.ReplyTheme
@@ -71,33 +78,49 @@ fun run_App() {
         }
     }
 }
+@SuppressLint("SuspiciousIndentation")
 @Composable
 fun Listdata(model: Mahasiswa) {
-    OutlinedCard(elevation = CardDefaults.cardElevation(defaultElevation = 10.dp),
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(10.dp),
-    ){
-        Column {
-            Row {
-                Image(painter = painterResource(id = model.image), contentDescription = "",
-                    modifier = Modifier
-                        .size(100.dp)
-                        .padding(15.dp)
-                    )
-                Column(
-                    modifier = Modifier
-                        .align(Alignment.CenterVertically)
-                ){
-                    Text(text = model.nama,
-                        style = MaterialTheme.typography.bodyLarge
-                    )
-                    Text(text = model.nim)
+    val context = LocalContext.current
 
+        OutlinedCard(elevation = CardDefaults.cardElevation(defaultElevation = 10.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp),
+        ) {
+            Column {
+                Row(
+                    modifier = Modifier
+                        .clickable {
+                            val intent_tujuan = Intent(context,ProfileDetail::class.java)
+                            intent_tujuan.putExtra("Test", model)
+                            context.startActivity(intent_tujuan)
+
+                        }
+                ){
+                    Image(
+                        painter = painterResource(id = model.image), contentDescription = "",
+                        modifier = Modifier
+                            .size(100.dp)
+                            .padding(15.dp)
+                            .clickable {
+
+                            }
+                    )
+                    Column(
+                        modifier = Modifier
+                            .align(Alignment.CenterVertically)
+                    ) {
+                        Text(
+                            text = model.nama,
+                            style = MaterialTheme.typography.bodyLarge,
+                        )
+                        Text(text = model.nim)
+
+                    }
                 }
             }
         }
-    }
 }
 @Composable
 fun adapter() {
@@ -107,6 +130,7 @@ fun adapter() {
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth()
+            .clickable {  }
     ){
         items(
             items = list_mahasiswa,

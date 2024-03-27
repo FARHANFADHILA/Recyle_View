@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Recyle_View</string>
+    <string name="title_activity_profile_detail">ProfileDetail</string>
 </resources>
