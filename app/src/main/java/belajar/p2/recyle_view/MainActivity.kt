@@ -2,18 +2,12 @@ package belajar.p2.recyle_view
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.res.Resources.Theme
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -33,14 +27,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.core.content.ContextCompat.startActivity
 import belajar.p2.recyle_view.data.Data_Source
 import belajar.p2.recyle_view.data.Mahasiswa
 import belajar.p2.recyle_view.ui.theme.ReplyTheme
@@ -56,7 +46,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    run_App()
+                    RunApp()
                 }
             }
         }
@@ -66,7 +56,7 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun run_App() {
+fun RunApp() {
     Scaffold(
         topBar = { TopAppBar(title = { Text(text = "Daftar Mahasiswa Kelas 4C")})}
     ){
@@ -74,7 +64,7 @@ fun run_App() {
             modifier = Modifier
                 .padding(top= 70.dp)
         ){
-            adapter()
+            Adapter()
         }
     }
 }
@@ -92,9 +82,9 @@ fun Listdata(model: Mahasiswa) {
                 Row(
                     modifier = Modifier
                         .clickable {
-                            val intent_tujuan = Intent(context,ProfileDetail::class.java)
-                            intent_tujuan.putExtra("Test", model)
-                            context.startActivity(intent_tujuan)
+                            val intentTujuan = Intent(context,ProfileDetail::class.java)
+                            intentTujuan.putExtra("Test", model)
+                            context.startActivity(intentTujuan)
 
                         }
                 ){
@@ -103,9 +93,6 @@ fun Listdata(model: Mahasiswa) {
                         modifier = Modifier
                             .size(100.dp)
                             .padding(15.dp)
-                            .clickable {
-
-                            }
                     )
                     Column(
                         modifier = Modifier
@@ -123,8 +110,8 @@ fun Listdata(model: Mahasiswa) {
         }
 }
 @Composable
-fun adapter() {
-    val list_mahasiswa = remember {
+fun Adapter() {
+    val listMahasiswa = remember {
         Data_Source.mahasiswa_list
     }
     LazyColumn(
@@ -133,30 +120,30 @@ fun adapter() {
             .clickable {  }
     ){
         items(
-            items = list_mahasiswa,
+            items = listMahasiswa,
             itemContent = { Listdata(model = it)}
         )
     }
 }
 @Preview
 @Composable
-fun prev() {
+fun Prev() {
     ReplyTheme(darkTheme = false){
         Surface(
             modifier = Modifier.fillMaxSize(),
         ) {
-            run_App()
+            RunApp()
         }
     }
 }
 @Preview
 @Composable
-fun prev2() {
+fun Prev2() {
     ReplyTheme(darkTheme = true){
         Surface(
             modifier = Modifier.fillMaxSize(),
         ) {
-            run_App()
+            RunApp()
         }
     }
 }

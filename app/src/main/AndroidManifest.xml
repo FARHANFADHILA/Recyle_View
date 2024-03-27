@@ -18,12 +18,8 @@
             android:label="@string/title_activity_profile_detail"
             android:theme="@style/Theme.Recyle_View" />
         <activity
-            android:name=".DetailActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.Recyle_View">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

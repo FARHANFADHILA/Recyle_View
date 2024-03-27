@@ -1,7 +1,6 @@
 package belajar.p2.recyle_view
 
 import android.annotation.SuppressLint
-import android.media.Image
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -18,15 +17,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.ReportFragment.Companion.reportFragment
 import belajar.p2.recyle_view.data.Mahasiswa
 import belajar.p2.recyle_view.ui.theme.ReplyTheme
 
+@Suppress("DEPRECATION")
 class ProfileDetail : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,10 +36,10 @@ class ProfileDetail : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    var modelTe = intent.getSerializableExtra("Test") as Mahasiswa
-                    var nama = modelTe.nama
-                    var nim = modelTe.nim
-                    var image = modelTe.image
+                    val modelTe = intent.getSerializableExtra("Test") as Mahasiswa
+                    val nama = modelTe.nama
+                    val nim = modelTe.nim
+                    val image = modelTe.image
 //                    Scaffold {
 //                        var modelTe = intent.getSerializableExtra("Test") as Mahasiswa
 //                        var nama = modelTe.nama
@@ -56,7 +54,7 @@ class ProfileDetail : ComponentActivity() {
 //                        }
 //
 //                    }
-                    prev(nama = nama, nim = nim, image = image )
+                    Prev(nama = nama, nim = nim, image = image )
                 }
             }
         }
@@ -65,7 +63,7 @@ class ProfileDetail : ComponentActivity() {
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun prev(nama: String, nim:String, image: Int) {
+fun Prev(nama: String, nim:String, image: Int) {
     ReplyTheme {
         Scaffold {
 
@@ -104,6 +102,6 @@ fun prev(nama: String, nim:String, image: Int) {
 }
 @Preview(showBackground = true)
 @Composable
-fun prev3() {
-    prev(nama = "farhan", nim = "1111111", image = R.drawable.saya )
+fun Prev3() {
+    Prev(nama = "farhan", nim = "1111111", image = R.drawable.saya )
 }
